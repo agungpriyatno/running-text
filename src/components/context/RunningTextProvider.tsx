@@ -1,7 +1,7 @@
 "use client";
 
 import { createArray } from "@/lib/utils";
-import { TResolution } from "@/types/running-text";
+import { TConfig, TResolution } from "@/types/running-text";
 import { createContext, ReactNode, useContext } from "react";
 
 export type RunningTextConfig = {
@@ -23,18 +23,15 @@ const useRunningTextContext = () => {
   return context;
 };
 
-export type RunningTextProviderProps = {
+export type RunningTextProviderConfig = {
   children: ReactNode;
-  config: {
-    container: TResolution;
-    length: number;
-    panel: TResolution;
-    delay: number;
-    speed: number;
-  };
+  config: TConfig;
 };
 
-const RunningTextProvider = ({ children, config }: RunningTextProviderProps) => {
+const RunningTextProvider = ({
+  children,
+  config,
+}: RunningTextProviderConfig) => {
   const { container, panel, length, delay, speed } = config;
   const columns = Math.floor(container.width / panel.width);
   const rows = Math.ceil(length / columns);
@@ -47,7 +44,11 @@ const RunningTextProvider = ({ children, config }: RunningTextProviderProps) => 
     items: items.reverse(),
     config: { container, panel, speed },
   };
-  return <RunningTextContext.Provider value={value}>{children}</RunningTextContext.Provider>;
+  return (
+    <RunningTextContext.Provider value={value}>
+      {children}
+    </RunningTextContext.Provider>
+  );
 };
 
 export { RunningTextContext, RunningTextProvider, useRunningTextContext };
