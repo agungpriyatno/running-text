@@ -8,7 +8,7 @@ import { TConfig } from "@/types/running-text";
 const CONFIG: TConfig = {
   container: { width: 1920, height: 160 },
   panel: { width: 80, height: 40 },
-  length: 96,
+  length: 83,
   delay: 0.8,
   speed: 100,
 };

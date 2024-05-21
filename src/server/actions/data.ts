@@ -1,9 +1,16 @@
 "use server";
 
-const DATA = `||| Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam temporibus enim doloribus obcaecati ipsum deserunt, totam modi quis ut saepes sint est rerum voluptatibus nemo nihil unde. Doloremque, sint corrupti. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, autem fugit. Voluptatibus libero, vitae repellat sint cupiditate ut, veniam doloremque deleniti blanditiis quasi, magnam iusto quaerat reprehenderit? Nesciunt, officiis exercitationem.`;
+import { TData } from "@/types/data";
+import { ApiError } from "next/dist/server/api-utils";
+import { fetchDataRepo } from "../repositories/data";
+import { dataToString } from "@/lib/utils";
 
 const fetchData = async () => {
-  return DATA;
+  const resp = await fetchDataRepo();
+  if (!resp.ok) throw new ApiError(500, "Server error");
+  const data = (await resp.json()) as TData;
+  const result = dataToString(data);
+  return result;
 };
 
 export { fetchData };
