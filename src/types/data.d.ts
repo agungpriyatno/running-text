@@ -5,7 +5,6 @@ export type TCompany = {
 
 export type TStock = {
     symbol: string,
-    company: TCompany,
     close: number,
     change: number,
     percent: number,

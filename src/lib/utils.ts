@@ -10,9 +10,9 @@ export function createArray(length: number) {
   return Array.from({ length });
 }
 
-export function dataToString(data: TData) {
-  const listString = data.data.results.map(
-    (item) => `${item.symbol} ${item.change} ${item.close} ${item.percent}%`
-  );
-  return listString.join(" | ");
-}
+// export function dataToString(data: TData) {
+//   const listString = data.data.results.map(
+//     (item) => `${item.symbol} ${item.change} ${item.close} ${item.percent}%`
+//   );
+//   return listString.join(" | ");
+// }
